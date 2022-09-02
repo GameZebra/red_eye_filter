@@ -22,7 +22,8 @@ from utils.image import (
 from utils.function_tracer import FunctionTracer
 
 def first_right_element(l: List, element: int) -> int:
-    for i in range(len(l), 0, -1):
+    right_id = None
+    for i in range(len(l)-1, -1, -1):
         if element == l[i]:
             right_id = i
     return right_id
@@ -48,7 +49,7 @@ def is_red_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_p
                 break
 
     #if true add them to checked_pixels 
-    print(status)
+    #print(status)
     if 1 in status:
         result = True
         for i in range(5):
@@ -64,6 +65,13 @@ def is_red_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_p
 def red_eye_filter(image: Union[PackedImage, StrideImage], x: int, y: int, status: List):
     patterns = [EYE_PATTERN_1, EYE_PATTERN_2, EYE_PATTERN_3, EYE_PATTERN_4]
     pattern_id = first_right_element(status, 1)
+    pattern = patterns[pattern_id]
+
+    for i in range(5):
+            for j in range(5):
+                is_not_white = pattern[i][j] != ' '
+                if is_not_white:
+                    image.pixels[image.resolution.height*(y+i)+(x+j)].red -= 150
 
 
 def compute_solution(images: List[Union[PackedImage, StrideImage]]):
@@ -85,14 +93,5 @@ def compute_solution(images: List[Union[PackedImage, StrideImage]]):
                     #if checking true: correct
                     if is_red:
                         red_eye_filter(image, x, y, status)
-                        
-                    #continue
-                    #if checking false: add coordinates as checked
-
-        break
-
-    
-
-    #TODO fill solution
     del ft
             
