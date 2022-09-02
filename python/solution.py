@@ -17,7 +17,7 @@ from utils.function_tracer import FunctionTracer
 
 import utils.eye_pattern 
 
-def is_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_pixels: List):
+def is_red_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_pixels: List):
     result = True
     for i in range(5):
         for j in range(5):
@@ -55,7 +55,7 @@ def compute_solution(images: List[Union[PackedImage, StrideImage]]):
                     #continue
                     #if checking false: add coordinates as checked
                     pass
-        is_eye(image, x, y, checked_pixels)
+        is_red_eye(image, x, y, checked_pixels)
         break
 
     
