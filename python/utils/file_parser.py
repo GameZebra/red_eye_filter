@@ -64,3 +64,15 @@ def print_images(images: List[Union[PackedImage, StrideImage]]) -> None:
     for index, image in enumerate(images):
         print(f"\n image{index}")
         print(f"{image}")
+
+def file_data_visualization(images: List[Union[PackedImage, StrideImage]]) -> None:
+    with open("data_visualization.txt", 'w') as f:
+        for index, image in enumerate(images):
+            f.write(f"\n image{index}\n")
+            f.write(f"{image.resolution}\n")
+            for y in range(image.resolution.height):
+                for x in range(image.resolution.width):
+                    #a = "".join([str(image.pixels[i]) for i in range(len(image.pixels))])
+                    f.write(f'{str(image.pixels[image.resolution.height*y+x].red).rjust(4)} ')
+                f.write(",\n")
+            break
