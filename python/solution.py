@@ -21,6 +21,11 @@ from utils.image import (
 
 from utils.function_tracer import FunctionTracer
 
+def first_right_element(l: List, element: int) -> int:
+    for i in range(len(l), 0, -1):
+        if element == l[i]:
+            right_id = i
+    return right_id
 
 
 def is_red_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_pixels: List):
@@ -56,6 +61,11 @@ def is_red_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_p
     return [result, status]
 
 
+def red_eye_filter(image: Union[PackedImage, StrideImage], x: int, y: int, status: List):
+    patterns = [EYE_PATTERN_1, EYE_PATTERN_2, EYE_PATTERN_3, EYE_PATTERN_4]
+    pattern_id = first_right_element(status, 1)
+
+
 def compute_solution(images: List[Union[PackedImage, StrideImage]]):
     ft = FunctionTracer("compute_solution", "seconds")
 
@@ -74,9 +84,11 @@ def compute_solution(images: List[Union[PackedImage, StrideImage]]):
                     is_red, status = is_red_eye(image, x, y, checked_pixels)
                     #if checking true: correct
                     if is_red:
+                        red_eye_filter(image, x, y, status)
                         
                     #continue
                     #if checking false: add coordinates as checked
+
         break
 
     
