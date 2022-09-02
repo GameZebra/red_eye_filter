@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from typing import List
+from utils.eye_pattern import EYE_PATTERN_4
 import utils.file_parser as fp
 from utils.image import (
     StrideImage,
@@ -20,10 +21,15 @@ def main():  # pylint: disable=missing-function-docstring
     #NOTE: data loading could take at least several seconds with big test files
     input_images, output_images = fp.generate_io_data(input_file_name, output_file_name, image_type)
     
-    fp.file_data_visualization(input_images)
-    fp.print_images(input_images)
+    #fp.file_data_visualization_pre(input_images)
+    #fp.print_images(input_images)
     compute_solution(input_images)
-    
+
+    #fp.file_data_visualization(input_images)
+    #fp.file_data_visualization_output(output_images)
+
+
+
     if input_images == output_images:
         print("Solution status - [SUCCESS]\n")
     else:

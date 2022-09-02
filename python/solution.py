@@ -26,6 +26,7 @@ def first_right_element(l: List, element: int) -> int:
     for i in range(len(l)-1, -1, -1):
         if element == l[i]:
             right_id = i
+            break
     return right_id
 
 
@@ -86,7 +87,7 @@ def compute_solution(images: List[Union[PackedImage, StrideImage]]):
                 else:
                     checked_pixels.append(image.resolution.height*y+x)
                 if image.pixels[image.resolution.height*y+x].red >= 200:
-                    if image.resolution.width - x-1 <= 5 or image.resolution.height - y-1 <= 5:
+                    if image.resolution.width - x < 5 or image.resolution.height - y < 5:
                         continue
                     #start checking
                     is_red, status = is_red_eye(image, x, y, checked_pixels)

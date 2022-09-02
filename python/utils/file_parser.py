@@ -75,4 +75,28 @@ def file_data_visualization(images: List[Union[PackedImage, StrideImage]]) -> No
                     #a = "".join([str(image.pixels[i]) for i in range(len(image.pixels))])
                     f.write(f'{str(image.pixels[image.resolution.height*y+x].red).rjust(4)} ')
                 f.write(",\n")
-            break
+            # break
+
+def file_data_visualization_output(images: List[Union[PackedImage, StrideImage]]) -> None:
+    with open("data_visualization_output.txt", 'w') as f:
+        for index, image in enumerate(images):
+            f.write(f"\n image{index}\n")
+            f.write(f"{image.resolution}\n")
+            for y in range(image.resolution.height):
+                for x in range(image.resolution.width):
+                    #a = "".join([str(image.pixels[i]) for i in range(len(image.pixels))])
+                    f.write(f'{str(image.pixels[image.resolution.height*y+x].red).rjust(4)} ')
+                f.write(",\n")
+            # break
+
+def file_data_visualization_pre(images: List[Union[PackedImage, StrideImage]]) -> None:
+    with open("data_visualization_pre.txt", 'w') as f:
+        for index, image in enumerate(images):
+            f.write(f"\n image{index}\n")
+            f.write(f"{image.resolution}\n")
+            for y in range(image.resolution.height):
+                for x in range(image.resolution.width):
+                    #a = "".join([str(image.pixels[i]) for i in range(len(image.pixels))])
+                    f.write(f'{str(image.pixels[image.resolution.height*y+x].red).rjust(4)} ')
+                f.write(",\n")
+            # break
