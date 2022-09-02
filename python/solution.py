@@ -22,10 +22,9 @@ def is_eye(image: Union[PackedImage, StrideImage], x: int, y: int, checked_pixel
     for i in range(5):
         for j in range(5):
             if i == 0 and j == 0:
-                    continue
-            
-    is_red = image.pixels[image.resolution.height*y+x].red >= 200
-    is_non_white = EYE_PATTERN_1[0][0] != ' '
+                    continue    
+        is_red = image.pixels[image.resolution.height*(y+i)+(x+j)].red >= 200
+        is_non_white = EYE_PATTERN_1[i][j] != ' '
     
     #if true add them to checked_pixels 
     if result == True:
@@ -49,6 +48,8 @@ def compute_solution(images: List[Union[PackedImage, StrideImage]]):
                 else:
                     checked_pixels.append(image.resolution.height*y+x)
                 if image.pixels[image.resolution.height*y+x].red >= 200:
+                    if image.resolution.width - x < 5 or image.resolution.height - y < 5:
+                        continue
                     #start checking
                     #if checking true: correct
                     #continue
